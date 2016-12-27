@@ -10,7 +10,7 @@ angular
     function checkCurrencyPairList() {
       return !!localStorage.currencyPairList || (localStorage.currencyPairList = '[]')
     }
-    function setCurrencyList() {
+    function setLocalCurrencyList() {
       apiInfoService.getCurrencyList().then(function (resp) {
         var list = resp.data.CurrencyList.map(function (item) {
             return item.Symbol
@@ -19,14 +19,21 @@ angular
         localStorage.currencyList = JSON.stringify(list)
       })
     }
-    var setCurrencyPair = function () {
+    function getCurrencyPairList() {
+      return localStorage.currencyPairList
+    }
+    var setCurrencyPair = function (item) {
 
     }
-    function getCurrencyList() {
+    function getLocalCurrencyList() {
       return JSON.parse(localStorage.currencyList)
     }
     return {
       checkCurrencyList: checkCurrencyList,
-      getCurrencyList: getCurrencyList
+      setLocalCurrencyList: setLocalCurrencyList,
+      getLocalCurrencyList: getLocalCurrencyList,
+
+      setCurrencyPair: setCurrencyPair,
+      checkCurrencyPairList: checkCurrencyPairList
     }
   }
